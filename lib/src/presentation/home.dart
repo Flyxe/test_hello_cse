@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_hello_cse/src/domain/movie.dart';
 import 'package:test_hello_cse/src/data/api_service.dart';
-import 'package:test_hello_cse/src/presentation/movie_card.dart';
+import 'package:test_hello_cse/src/presentation/my_widgets/movie_card.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
