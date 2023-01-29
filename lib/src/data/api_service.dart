@@ -24,7 +24,6 @@ class ApiService {
           movies.add(Movie.fromJson(jsonDecode(response.body)));
         }
       }
-      print(movies);
       return movies;
     } catch (e) {
       log(e.toString());

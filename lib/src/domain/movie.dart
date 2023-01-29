@@ -1,13 +1,17 @@
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 class Movie {
+  final int id;
   final String imageURL;
   final String title;
   final DateTime date;
   final String description;
 
+
+  static int incrementId = 0;
+
   const Movie({
+    required this.id,
     required this.imageURL,
     required this.title,
     required this.date,
@@ -16,6 +20,7 @@ class Movie {
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
+      id : incrementId++, 
       imageURL: 'https://image.tmdb.org/t/p/original${json["poster_path"]}',
       title: json["title"],
       date: DateTime.parse(json["release_date"]),
@@ -29,6 +34,6 @@ class Movie {
 
   @override
   String toString() {
-    return "title : $title | date : $date | imageURL : $imageURL | description : $description";
+    return "id : $id title : $title | date : $date | imageURL : $imageURL | description : $description";
   }
 }

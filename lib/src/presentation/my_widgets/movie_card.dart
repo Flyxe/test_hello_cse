@@ -4,10 +4,14 @@ import '../../../constants.dart';
 import '../../domain/movie.dart';
 import 'favorite_button.dart';
 
-class MovieCard extends StatelessWidget {
+class MovieCard extends StatefulWidget {
   const MovieCard({super.key, required this.movie});
   final Movie movie;
+  @override
+  State<MovieCard> createState() => _MovieCardState();
+}
 
+class _MovieCardState extends State<MovieCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,7 +31,7 @@ class MovieCard extends StatelessWidget {
                   */
             CachedNetworkImage(
               placeholder: (context, url) => const CircularProgressIndicator(),
-              imageUrl: movie.imageURL,
+              imageUrl: widget.movie.imageURL,
             ),
             Expanded(
               child: Padding(
@@ -41,16 +45,16 @@ class MovieCard extends StatelessWidget {
                         Expanded(child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(movie.title, style: AppFonts.title, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis,),
+                            Text(widget.movie.title, style: AppFonts.title, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis,),
                             const SizedBox(height: 2),
-                            Text(movie.frenchDate(), style: AppFonts.date, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis,),
+                            Text(widget.movie.frenchDate(), style: AppFonts.date, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis,),
                             const SizedBox(height: 10),
                           ]
                         ),),
-                        const FavoriteButton(isFavorite: false,)
+                        FavoriteButton(movie: widget.movie)
                       ],
                     ),
-                    Text(movie.description, style: AppFonts.description, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis,maxLines: 6),
+                    Text(widget.movie.description, style: AppFonts.description, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis,maxLines: 6),
                   ],
                 ),
               ),
