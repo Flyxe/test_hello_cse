@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
@@ -6,36 +7,35 @@ import '../models/movie.dart';
 
 class ApiService {
   static String baseUrl = 'https://api.themoviedb.org/3';
-  static String moviesEndpoint = '/trending/all/day?api_key=';
-  static String apiKey = '64367ea9be18cde3c1d2e4fc7744732d';
+  static String moviesEndpoint = '/movie/';
+  static String parameters = '?api_key=64367ea9be18cde3c1d2e4fc7744732d&language=fr';
 
-  static String testLangue = "https://api.themoviedb.org/3/movie/76341?api_key=64367ea9be18cde3c1d2e4fc7744732d&language=fr";
-  //api_key=64367ea9be18cde3c1d2e4fc7744732d
-  static String testLangue2 = "https://api.themoviedb.org/3/configuration/languages?api_key=64367ea9be18cde3c1d2e4fc7744732d";
-
+  static String search = "https://api.themoviedb.org/3/search/movie?api_key=64367ea9be18cde3c1d2e4fc7744732d&language=fr&query=mission cléopatre&page=1&include_adult=false";
+  
+  List<int> moviesID = [4922, 550, 1555, 41211, 157336, 1366, 366564, 761, 15152, 2899];
+  
   Future<List<Movie>?> getMovies() async {
     try {
-      var url = Uri.parse(baseUrl + moviesEndpoint + apiKey + "&language=fr");
-      var response = await http.get(url);
-      if (response.statusCode == 200) {
-        //List<Movie> _model = Movie.fromJson(response.body);
-        //return _model;
-        print("réponse :  $response");
-        log("réponse body :  ${response.body}");
-        print("réponse status code:  ${response.statusCode}");
-
+      List<Movie> movies = [];
+      for (int i in moviesID){
+        var url = Uri.parse(baseUrl + moviesEndpoint + i.toString() + parameters);
+        var response = await http.get(url);
+        if (response.statusCode == 200) {
+          movies.add(Movie.fromJson(jsonDecode(response.body)));
+        }
       }
+      print(movies);
+      return movies;
     } catch (e) {
       log(e.toString());
+      return null;
     }
   }
-  Future<List<Movie>?> testingLanguage() async {
+  /*Future<List<Movie>?> searchMovie() async {
     try {
-      var url = Uri.parse(testLangue);
+      var url = Uri.parse(search);
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        //List<Movie> _model = Movie.fromJson(response.body);
-        //return _model;
         print("réponse :  $response");
         print("réponse body :  ${response.body}");
         print("réponse status code:  ${response.statusCode}");
@@ -44,7 +44,7 @@ class ApiService {
     } catch (e) {
       log(e.toString());
     }
-  }
+  }*/
 }
 
   

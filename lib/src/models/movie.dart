@@ -12,12 +12,15 @@ class Movie {
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
-    print("Json reçu :  $json");
     return Movie(
-      image: "",
-      title: "",
-      date: DateTime.now(),
-      description: "",
+      image: json["poster_path"],
+      title: json["title"],
+      date: DateTime.parse(json["release_date"]),
+      description: json["overview"],
     );
+  }
+  @override
+  String toString() {
+    return "title : $title | date : $date | image : $image | description : $description";
   }
 }
