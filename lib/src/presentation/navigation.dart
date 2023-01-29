@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_hello_cse/src/screens/favorites.dart';
+import 'package:test_hello_cse/src/presentation/favorites.dart';
 
 import 'home.dart';
 

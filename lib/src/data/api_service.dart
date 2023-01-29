@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
-import '../models/movie.dart';
+import '../domain/movie.dart';
 
 class ApiService {
   static String baseUrl = 'https://api.themoviedb.org/3';
